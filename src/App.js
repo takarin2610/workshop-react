@@ -1,21 +1,26 @@
 import React from 'react';
-import { Navbar, Container, NavbarBrand } from 'reactstrap';
-import NucampLogo from './app/assets/img/logo.png';
-import CampsitesList from './features/counter/CampsitesList';
+import Header from './components/Header';
+import CampsitesDirectoryPage from './pages/CampsitesDirectoryPage';
 import './App.css';
 import Footer from './components/Footer';
+import { Route, Routes } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import ContactPage from './pages/ContactPage';
+import CampsiteDetailPage from './pages/CampsiteDetailPage';
 
 function App() {
   return (
       <div className='App'>
-          <Navbar dark color='primary' sticky='top' expand='md'>
-              <Container>
-                  <NavbarBrand href='/'>
-                      <img src={NucampLogo} alt='nucamp logo' />
-                  </NavbarBrand>
-              </Container>
-          </Navbar>
-          <CampsitesList/>
+          <Header/>
+          <Routes>
+            <Route path='/' element={<HomePage/>}/>
+            <Route path='contact' element={<ContactPage/>}/>
+            <Route path='directory' element={<CampsitesDirectoryPage/>}/>
+            <Route
+              path='directory/:campsiteId'
+              element={<CampsiteDetailPage />}
+              />
+          </Routes>
           <Footer/>
       </div>
   );
