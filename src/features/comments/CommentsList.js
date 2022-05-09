@@ -3,7 +3,8 @@ import Comment from './Comment';
 import { selectCommentsByCampsiteId } from './commentsSlice';
 
 
-const CommentsList = ({ campsiteId }) => {    const comments = selectCommentsByCampsiteId(campsiteId);
+const CommentsList = ({ campsiteId }) => {    
+    const comments = selectCommentsByCampsiteId(campsiteId);
 
     if (comments && comments.length > 0) {
         return (
