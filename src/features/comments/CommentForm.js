@@ -3,7 +3,7 @@ import { Button, Modal, ModalHeader, ModalBody, FormGroup, Label } from "reactst
 import {Form, Formik, Field, ErrorMessage} from 'formik';
 import { validateCommentForm } from "../../utils/validateCommentForm";
 import { useDispatch } from "react-redux";
-import { addComment } from "./commentsSlice";
+import { postComment } from "./commentsSlice";
 
 
 const CommentForm = ({campsiteId}) => {
@@ -18,7 +18,7 @@ const CommentForm = ({campsiteId}) => {
             date: new Date(Date.now()).toISOString()
     };
     console.log('comment', comment);
-    dispatch(addComment(comment));
+    dispatch(postComment(comment));
     setModalOpen(false);
     }
     return(
@@ -49,7 +49,9 @@ const CommentForm = ({campsiteId}) => {
                                     as='select'
                                     className='form-control'
                                 >
-                                    <option>Select...</option>
+                                    <option selected={true}
+                                    disabled={true}
+                                    >Select...</option>
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>

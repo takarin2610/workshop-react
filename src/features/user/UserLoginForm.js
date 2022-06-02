@@ -17,8 +17,8 @@ const UserLoginForm = () => {
     const [loginModalOpen, setLoginModalOpen] = useState(false);
     const currentUser = useSelector(selectCurrentUser);
     const dispatch = useDispatch();
-    const handleLogin = (values) =>{
-        const currentUser ={
+    const handleLogin = (values) => {
+        const currentUser = {
             id: Date.now(),
             avatar: defaultAvatar,
             username: values.username,
@@ -27,10 +27,10 @@ const UserLoginForm = () => {
         dispatch(setCurrentUser(currentUser));
         setLoginModalOpen(false);
     }
-    return(
+    return (
         <>
-        <span className='navbar-text ml-auto'>
-        {currentUser ? (
+            <span className='navbar-text ml-auto'>
+                {currentUser ? (
                     <div style={{ width: '4rem', height: '4rem' }}>
                         <img
                             src={currentUser.avatar}
@@ -47,50 +47,51 @@ const UserLoginForm = () => {
                         <i className='fa fa-sign-in fa-lg' /> Login
                     </Button>
                 )}
-        </span>
-        <Modal isOpen={loginModalOpen}>
-                    <ModalHeader toggle= {() => setLoginModalOpen(false)}>
-                    </ModalHeader>
-                    <ModalBody>
-                        <Formik initialValues={{
-                            username: '',
-                            password: '',
-                        }
-                        }
-                        onSubmit= {handleLogin}
-                        validate= {validateUserLoginForm}
-                        >
+            </span>
+            <Modal isOpen={loginModalOpen}>
+                <ModalHeader toggle={() => setLoginModalOpen(false)}>
+                    Login
+                </ModalHeader>
+                <ModalBody>
+                    <Formik initialValues={{
+                        username: '',
+                        password: '',
+                    }
+                    }
+                        onSubmit={handleLogin}
+                        validate={validateUserLoginForm}
+                    >
                         <Form>
-                           <FormGroup>
-                            <Label htmlFor='username'>Username</Label>
-                            <Field 
-                            id="username"
-                            name="username"
-                            placeholder="Username"
-                            className="form-control"
-                            >
+                            <FormGroup>
+                                <Label htmlFor='username'>Username</Label>
+                                <Field
+                                    id="username"
+                                    name="username"
+                                    placeholder="Username"
+                                    className="form-control"
+                                >
                                 </Field>
                                 <ErrorMessage name="username">
-                                {(msg) => <p className='text-danger'>{msg}</p>}
-                                </ErrorMessage>   
-                            </FormGroup> 
-                           <FormGroup>
-                           <Label htmlFor='password'>Password</Label>
-                           <Field
-                           id="password"
-                           name="password"
-                           placeholder="Password"
-                           className="form-control"
-                           ></Field>
-                            <ErrorMessage name="password">
-                                {(msg) => <p className='text-danger'>{msg}</p>}
-                            </ErrorMessage>
-                           </FormGroup> 
-                           <Button type='submit' color='primary'>Login</Button>
+                                    {(msg) => <p className='text-danger'>{msg}</p>}
+                                </ErrorMessage>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label htmlFor='password'>Password</Label>
+                                <Field
+                                    id="password"
+                                    name="password"
+                                    placeholder="Password"
+                                    className="form-control"
+                                ></Field>
+                                <ErrorMessage name="password">
+                                    {(msg) => <p className='text-danger'>{msg}</p>}
+                                </ErrorMessage>
+                            </FormGroup>
+                            <Button type='submit' color='primary'>Login</Button>
                         </Form>
-                        </Formik>
-                    </ModalBody>
-        </Modal>
+                    </Formik>
+                </ModalBody>
+            </Modal>
         </>
     );
 };
