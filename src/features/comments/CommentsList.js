@@ -17,7 +17,7 @@ const CommentsList = ({ campsiteId }) => {
             <Loading />
         ) : errMsg ? (
             <Error errMsg={errMsg} />
-        ) :
+        ) : 
         (
             <Col md='5' className='m-1'>
                 <h4>Comments</h4>

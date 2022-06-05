@@ -17,20 +17,21 @@ export const fetchComments = createAsyncThunk(
 
 export const postComment = createAsyncThunk(
     'comments/postComment',
-    async (comment, {dispatch}) => {
-        const response = await fetch((baseUrl + 'comments'),
-        {
-        method: 'POST',
-        body: JSON.stringify(comment),
-        headers: {'Content-Type': 'application/json'}    
-        });
-        if(!response.ok){
-            return Promise.reject('Unable to fetch, status: ' + response.status);
-        }
-        const data = await response.json();
-        dispatch(addComment(data));
+async (comment, {dispatch}) => {
+    const response = await fetch((baseUrl + 'comments'),
+    {
+    method: 'POST',
+    body: JSON.stringify(comment),
+    headers: {'Content-Type': 'application/json'}    
+    });
+    if(!response.ok){
+        return Promise.reject('Unable to fetch, status: ' + response.status);
     }
+    const data = await response.json();
+    dispatch(addComment(data));
+}
 );
+
 
 const initialState = {
     commentsArray: [],
@@ -58,7 +59,6 @@ const commentsSlice = createSlice({
         },
         [fetchComments.fulfilled]: (state, action) => {
             state.isLoading = false;
-            state.errMsg = '';
             state.commentsArray = mapImageURL(action.payload);
         },
         [fetchComments.rejected]: (state, action) => {
@@ -66,10 +66,10 @@ const commentsSlice = createSlice({
             state.errMsg = action.error ? action.error.message : "Fetch failed";
         },
         [postComment.rejected]: (state, action) => {
-           alert(
-               'Your comment could not be posted\nError: ' + (action.error ? action.error.message: 'Fetch failed')
-           ); 
-        }
+            alert(
+                'Your comment could not be posted\nError: ' + (action.error ? action.error.message: 'Fetch failed')
+            ); 
+         }
     }
 });
 

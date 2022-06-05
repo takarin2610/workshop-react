@@ -49,9 +49,7 @@ const CommentForm = ({campsiteId}) => {
                                     as='select'
                                     className='form-control'
                                 >
-                                    <option selected={true}
-                                    disabled={true}
-                                    >Select...</option>
+                                    <option>Select...</option>
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>
